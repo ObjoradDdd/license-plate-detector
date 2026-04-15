@@ -6,7 +6,7 @@ from ultralytics import YOLO
 # Ensure the log directory exists
 os.makedirs('./data', exist_ok=True)
 
-# Configure logger (Singleton pattern via built-in logging module)
+# Configure logger
 logging.basicConfig(
     filename='./data/log_file.log',
     level=logging.INFO,
@@ -42,17 +42,13 @@ class My_LicensePlate_Model:
         """
         results_list = []
         try:
-            # Run the frame through the model (verbose=False to keep the console clean)
             results = self.model(frame, verbose=False)
             
-            # Extract data from YOLO results
             for result in results:
                 boxes = result.boxes
                 for box in boxes:
-                    # Get bounding box coordinates in (x1, y1, x2, y2) format
                     x1, y1, x2, y2 = box.xyxy[0].tolist()
                     
-                    # Get the probability (model confidence)
                     conf = float(box.conf[0])
                     
                     results_list.append({
@@ -64,5 +60,5 @@ class My_LicensePlate_Model:
             
         except Exception as e:
             logger.error(f"Error during detection on frame: {e}")
-            
+            raise
         return results_list

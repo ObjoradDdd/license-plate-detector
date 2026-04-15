@@ -1,0 +1,14 @@
+services:
+  video_processor:
+    build: .
+    volumes:
+      - ./data:/app/data
+    command: ["--mode", "video", "--input", "data/test_video.mp4", "--output", "data/result.mp4"]
+
+  live_stream:
+    build: .
+    volumes:
+      - ./data:/app/data
+    devices:
+      - "/dev/video0:/dev/video0"
+    command: ["--mode", "stream"]
