@@ -21,8 +21,6 @@
 
 - Обработка видеофайлов с сохранением результата.
 - Потоковая детекция с веб-камеры.
-- Логи в папке [data/](data/).
-- Готовые веса в [best.pt](best.pt).
 
 ### Быстрый старт
 
@@ -54,16 +52,11 @@ poetry run python main.py --mode stream
 docker compose up --build video_processor
 ```
 
-Для потокового режима:
-
-```bash
-docker compose up --build live_stream
-```
-
 ### Как это устроено
 
 - Входная точка CLI находится в [main.py](main.py).
 - Модель и инференс описаны в [model_impl.py](model_impl.py).
+- Ноутбук для обучения и экспериментов находится в [assets/train.ipynb](assets/train.ipynb).
 - Docker-сборка — в [Dockerfile](Dockerfile) и [docker-compose.yml](docker-compose.yml).
 
 ### Примечания
